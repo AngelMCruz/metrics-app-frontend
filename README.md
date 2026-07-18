@@ -1,16 +1,24 @@
-# React + Vite
+# Metrics App - Frontend (Client)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este repositorio contiene la interfaz de usuario (Frontend) para la aplicación **Metrics App**, desarrollada como parte del período de evaluación técnica. El sistema consiste en un Dashboard de Analítica Empresarial diseñado con un enfoque modular, alta fidelidad visual y consumo eficiente de servicios API REST distribuidos.
 
-Currently, two official plugins are available:
+## Tecnologías Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **React (v19+)**: Librería base para la construcción de interfaces mediante componentes declarativos y reutilizables.
+* **Vite**: Herramienta de construcción y entorno de desarrollo de alto rendimiento dotada de Hot Module Replacement (HMR).
+* **Axios**: Cliente HTTP para la gestión automatizada e interceptación de peticiones hacia el entorno del servidor.
+* **Lucide React**: Biblioteca optimizada para la implementación de iconografía corporativa de alta definición vectorial.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Arquitectura de Directorios
 
-## Expanding the ESLint configuration
+El código fuente se encuentra estructurado bajo buenas prácticas organizacionales dentro de la carpeta `/src`, garantizando la separación de responsabilidades:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+src/
+├── components/   # Elementos visuales reutilizables (Cards, Dashboards, Navbar)
+├── services/     # Lógica corporativa externa y canal de comunicación HTTP (api.js)
+├── App.jsx       # Punto de entrada principal y orquestador del estado de la UI
+└── main.jsx      # Inicializador del DOM de React y configuraciones globales
+```
