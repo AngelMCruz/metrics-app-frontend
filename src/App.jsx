@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import api from './services/api';
 import MetricCard from './components/MetricCard';
+import HistoricoChart from './components/HistoricoChart';
 import './App.css';
 
 function App() {
   const [metricas, setMetricas] = useState([]);
+  const [departamentos, setDepartamentos] = useState([]);
   const [error, setError] = useState(null);
-  // 1. Mantenemos "Todos" en coherencia con el arreglo de abajo
   const [departamentoActivo, setDepartamentoActivo] = useState('1');
 
   useEffect(() => {
-    let ruta = '/metricas';
+    api.get('/departamentos')
+      .then(response => {
+        setDepartamentos(response.data);
+        if (response.data.length > 0) {
+          setDepartamentoActivo(response.data[0].id.toString());
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }, []);
 
+  useEffect(() => {
+    if (!departamentoActivo) return;
+
+    let ruta = '/metricas';
     if (departamentoActivo !== 'Todos') {
       ruta += `?departamento=${departamentoActivo}`;
     }
@@ -21,15 +36,20 @@ function App() {
         setMetricas(response.data);
       })
       .catch(err => {
-        console.error('Error al obtener las métricas:', err);
+        console.error(err);
         setError('Error al obtener las métricas: ' + err.message);
       });
   }, [departamentoActivo]);
 
+  const datosTarjetas = metricas.some(m => m.mes) 
+    ? metricas.filter(m => m.mes === 'Actual') 
+    : metricas;
+
+  const datosHistorico = metricas.filter(m => m.mes && m.mes !== 'Actual');
+
   return (
     <div className="app-container">
       
-      {/* 1. NAVBAR SUPERIOR */}
       <header className="navbar">
         <div className="navbar-logo"></div>
         <div className="navbar-links">
@@ -40,7 +60,6 @@ function App() {
         </div>
       </header>
 
-      {/* 2. HERO SECTION OSCURA */}
       <section className="hero-section">
         <div className="hero-content">
           <h1>Metrics Dashboard</h1>
@@ -49,51 +68,46 @@ function App() {
         </div>
       </section>
 
-      {/* CONTENEDOR CENTRAL */}
       <div className="content-wrapper">
         
-        {/* CORREGIDO: Usamos className en lugar de style mal estructurado */}
         {error && <p className="error-message">{error}</p>}
 
-        {/* CORREGIDO: Agregada la 's' a filters-container para enlazar el CSS */}
         <div className="filters-container">
-          {/* CORREGIDO: Cambiado 'Todas' por 'Todos' para coincidir con el estado inicial */}
-          {[
-            { id: '1', nombre: 'Sales' },
-            { id: '2', nombre: 'Marketing' },
-            { id: '3', nombre: 'Support' },
-            { id: '4', nombre: 'Engineering' }
-          ].map((dept) => (
+          {departamentos.map((dept) => (
             <button
               key={dept.id}
-              className={`filter-tab ${departamentoActivo === dept.id ? 'active' : ''}`}
-              onClick={() => setDepartamentoActivo(dept.id)}
+              className={`filter-tab ${departamentoActivo === dept.id.toString() ? 'active' : ''}`}
+              onClick={() => setDepartamentoActivo(dept.id.toString())}
             >
               {dept.nombre}
             </button>
           ))}
         </div>
 
-        {/* 3. GRID DE DOS COLUMNAS */}
         <div className="main-grid">
           
-          {/* Columna Izquierda: Bloques Grandes */}
           <div className="left-column">
-            <div className="wireframe-block-large"></div>
+            <div className="wireframe-block-large" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+              {datosHistorico.length > 0 ? (
+                <HistoricoChart data={datosHistorico} />
+              ) : (
+                <p style={{ color: 'var(--text-light)', fontSize: '0.85rem', textAlign: 'center', padding: '20px' }}>
+                  Ajusta tu Backend a la tabla 'metricas_homogeneas' para activar el gráfico histórico.
+                </p>
+              )}
+            </div>
             <div className="wireframe-block-large"></div>
             <div className="wireframe-block-large"></div>
           </div>
 
-          {/* Columna Derecha: Tarjetas Pequeñas */}
           <div className="right-column">
-            {metricas.map((metrica) => (
+            {datosTarjetas.map((metrica) => (
               <MetricCard key={metrica.id} metric={metrica} />
             ))}
           </div>
         </div>
       </div>
 
-      {/* 4. FOOTER */}
       <footer className="footer">
         <div className="footer-dots">
           <div className="footer-dot"></div>

@@ -1,38 +1,44 @@
 import React from 'react';
-import { BarChart2, TrendingUp, DollarSign, Activity } from 'lucide-react';
+import { BarChart2, TrendingUp, DollarSign, Activity, Percent, Clock } from 'lucide-react';
 
-// Funcion auxiliar para asignar iconos a cada métrica según su nombre
-const getIconForMetric = (metricName) => {
-  switch (metricName) {
-    case 'Company Revenue':
+const getIconForMetric = (concepto) => {
+  switch (concepto) {
+    case 'revenue_impact':
       return <DollarSign size={16} />;
-    case 'Customer Satisfaction':
-      return <Activity size={16} />;
-    case 'Customer Retention Rate':
-      return <TrendingUp size={16} />;
+    case 'efficiency_rate':
+      return <Percent size={16} />;
+    case 'velocity_score':
+      return <Clock size={16} />;
     default:
       return <BarChart2 size={16} />;
   }
 };
 
 function MetricCard({ metric }) {
-    return (
+  const { nombre_visual, valor_numerico, unidad, concepto } = metric;
+
+  const formatearValor = () => {
+    if (unidad === '$') return `$${Number(valor_numerico).toLocaleString()}`;
+    if (unidad === 'M') return `$${valor_numerico}M`;
+    return `${valor_numerico}${unidad === '%' || unidad === '/sem' ? unidad : ' ' + unidad}`;
+  };
+
+  return (
     <div className="metric-row-container">
       
-      {/* BLOQUE OSCURO IZQUIERDO: Valor destacado e icono */}
       <div className="metric-visual-block">
-        <span className="visual-value">{metric.valor_metrica}</span>
+        <span className="visual-value">{formatearValor()}</span>
         <div className="visual-icon">
-          {getIconForMetric(metric.titulo_reporte)}
+          {getIconForMetric(concepto)}
         </div>
       </div>
       
-      {/* BLOQUE DERECHO: Texto e indicadores */}
       <div className="metric-text-block">
-        <div className="metric-row-title">{metric.titulo_reporte}</div>
-        <div className="metric-row-description">{metric.descripcion}</div>
+        <div className="metric-row-title">{nombre_visual}</div>
+        <div className="metric-row-description">
+          Indicador estratégico de rendimiento operativo para el concepto de {concepto.replace('_', ' ')}.
+        </div>
         
-        {/* Los pequeños cuadros verdes que simulan el wireframe */}
         <div className="metric-badges">
           <span className="badge-dot"></span>
           <span className="badge-dot"></span>
@@ -40,7 +46,7 @@ function MetricCard({ metric }) {
       </div>
 
     </div>
-    );
+  );
 }
 
 export default MetricCard;
