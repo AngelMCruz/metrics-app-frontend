@@ -2,14 +2,20 @@ import React from 'react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 function HistoricoChart({ data }) {
-  
-  if (!data || data.length === 0) {
-    return <p style={{ color: 'var(--text-light)', padding: '20px' }}>Cargando datos históricos...</p>;
-  }
+  const formatearMonedaCorta = (valor) => {
+    if (valor >= 1000000) return `$${(valor / 1000000).toFixed(1)}M`;
+    if (valor >= 1000) return `$${(valor / 1000).toFixed(0)}K`;
+    return `$${valor}`;
+  };
 
+  const FormatearValor = (valor, unidad) => {
+    return unidad === '$' ? `$${valor}` : `${valor} ${unidad}`;
+  };
+
+  if (!data || data.length === 0) return null; 
   // Obtenemos el nombre visual y la unidad del primer elemento para los textos del gráfico
-  const nombreMetrica = data[0].nombre_visual;
-  const unidad = data[0].unidad;
+  const nombreMetrica = data[0]?.nombre_visual || 'Métrica';
+  const unidad = data[0]?.unidad || '';
 
   return (
     <div style={{ width: '100%', height: '100%', minHeight: '220px', padding: '10px' }}>
@@ -22,8 +28,8 @@ function HistoricoChart({ data }) {
         Histórico Mensual: {nombreMetrica}
       </h3>
       
-      <ResponsiveContainer width="100%" height={180}>
-        <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+      <ResponsiveContainer width="100%" height={220}>
+        <AreaChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
           <defs>
             {/* Gradiente cian brillante para el fondo del gráfico */}
             <linearGradient id="colorCian" x1="0" y1="0" x2="0" y2="1">
@@ -39,6 +45,7 @@ function HistoricoChart({ data }) {
             stroke="var(--text-light)" 
             fontSize={11}
             tickLine={false} 
+            axisLine={false}
           />
           
           <YAxis 
@@ -46,6 +53,8 @@ function HistoricoChart({ data }) {
             fontSize={11}
             tickLine={false}
             axisLine={false}
+            dy={10}
+            tickFormatter={unidad === '$' ? formatearMonedaCorta : undefined}
           />
           
           {/* Tooltip personalizado con la estética oscura del dashboard */}
