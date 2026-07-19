@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from './services/api';
+import MetricCard from './components/MetricCard';
 import './App.css';
 
 function App() {
@@ -58,12 +59,10 @@ function App() {
 
           {/* Columna Derecha: Tarjetas Pequeñas */}
           <div className="right-column">
-            <div className="wireframe-card-small"></div>
-            <div className="wireframe-card-small"></div>
-            <div className="wireframe-card-small"></div>
-            <div className="wireframe-card-small"></div>
+            { metricas.map((metrica, index) => (
+              <MetricCard key={metrica.id} metric={metrica} />
+            )) }
           </div>
-
         </div>
       </div>
 
