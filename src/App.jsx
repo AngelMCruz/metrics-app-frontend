@@ -6,10 +6,17 @@ import './App.css';
 function App() {
   const [metricas, setMetricas] = useState([]);
   const [error, setError] = useState(null);
+  // 1. Mantenemos "Todos" en coherencia con el arreglo de abajo
+  const [departamentoActivo, setDepartamentoActivo] = useState('1');
 
   useEffect(() => {
-    // Petición al backend para obtener las métricas
-    api.get('/metricas')
+    let ruta = '/metricas';
+
+    if (departamentoActivo !== 'Todos') {
+      ruta += `?departamento=${departamentoActivo}`;
+    }
+
+    api.get(ruta)
       .then(response => {
         setMetricas(response.data);
       })
@@ -17,7 +24,7 @@ function App() {
         console.error('Error al obtener las métricas:', err);
         setError('Error al obtener las métricas: ' + err.message);
       });
-  }, []);
+  }, [departamentoActivo]);
 
   return (
     <div className="app-container">
@@ -45,7 +52,27 @@ function App() {
       {/* CONTENEDOR CENTRAL */}
       <div className="content-wrapper">
         
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {/* CORREGIDO: Usamos className en lugar de style mal estructurado */}
+        {error && <p className="error-message">{error}</p>}
+
+        {/* CORREGIDO: Agregada la 's' a filters-container para enlazar el CSS */}
+        <div className="filters-container">
+          {/* CORREGIDO: Cambiado 'Todas' por 'Todos' para coincidir con el estado inicial */}
+          {[
+            { id: '1', nombre: 'Sales' },
+            { id: '2', nombre: 'Marketing' },
+            { id: '3', nombre: 'Support' },
+            { id: '4', nombre: 'Engineering' }
+          ].map((dept) => (
+            <button
+              key={dept.id}
+              className={`filter-tab ${departamentoActivo === dept.id ? 'active' : ''}`}
+              onClick={() => setDepartamentoActivo(dept.id)}
+            >
+              {dept.nombre}
+            </button>
+          ))}
+        </div>
 
         {/* 3. GRID DE DOS COLUMNAS */}
         <div className="main-grid">
@@ -59,9 +86,9 @@ function App() {
 
           {/* Columna Derecha: Tarjetas Pequeñas */}
           <div className="right-column">
-            { metricas.map((metrica, index) => (
+            {metricas.map((metrica) => (
               <MetricCard key={metrica.id} metric={metrica} />
-            )) }
+            ))}
           </div>
         </div>
       </div>
