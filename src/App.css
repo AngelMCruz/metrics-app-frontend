@@ -91,17 +91,53 @@
   gap: 0px;
 }
 
-/* Bloques de simulación del Wireframe */
+/* Bloques homogéneos de simulación del Wireframe */
 .wireframe-block-large {
   background-color: var(--bg-dark);
-  height: 150px;
-  border-radius: 8px;
+  height: 250px;
+  border-radius: 15px;
+  padding:4px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  position: relative;
+}
+
+/* Remueve el recuadro de selección azul/blanco al hacer clic en los SVG de los gráficos */
+.recharts-responsive-container:focus,
+.recharts-wrapper:focus,
+svg:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .wireframe-card-small {
   background-color: var(--bg-dark);
   height: 70px;
   border-radius: 8px;
+}
+
+/* Textos informativos de Fallback dentro de los contenedores */
+.fallback-text {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+}
+
+/* Mensajes de error */
+.error-message {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 /* Footer */
@@ -125,7 +161,6 @@
   border-radius: 50%;
 }
 
-
 /* ==========================================
    ESTILOS DE LAS TARJETAS (MetricCard)
    ========================================== */
@@ -136,7 +171,6 @@
   margin-bottom: 25px;
 }
 
-/* El bloque oscuro que se ve a la izquierda */
 .metric-visual-block {
   width: 95px;
   height: 110px;
@@ -158,7 +192,7 @@
   font-weight: 700;
   color: #ffffff;
   text-align: center;
-  whiute-space: nowrap;
+  white-space: nowrap;
 }
 
 .visual-icon {
@@ -167,7 +201,6 @@
   display: flex;
 }
 
-/* Bloque de contenido derecho */
 .metric-text-block {
   display: flex;
   flex-direction: column;
@@ -187,7 +220,6 @@
   line-height: 1.3;
 }
 
-/* Indicadores visuales en cian/verde abajo del texto */
 .metric-badges {
   display: flex;
   gap: 6px;
@@ -201,8 +233,6 @@
   border-radius: 3px;
   opacity: 0.8;
 }
-
-
 
 /* ==========================================
    ESTILOS DE LA BARRA DE FILTROS INTERACTIVOS
@@ -231,7 +261,6 @@
   color: var(--text-main);
 }
 
-/* La pestaña activa genera la barra cian inferior que emula el wireframe */
 .filter-tab.active {
   color: var(--text-main);
 }

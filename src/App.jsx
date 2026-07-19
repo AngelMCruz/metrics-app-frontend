@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from './services/api';
 import MetricCard from './components/MetricCard';
 import HistoricoChart from './components/HistoricoChart';
+import RendimientoRadarChart from './components/RendimientoRadarChart';
 import './App.css';
 
 function App() {
@@ -87,16 +88,29 @@ function App() {
         <div className="main-grid">
           
           <div className="left-column">
-            <div className="wireframe-block-large" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+            {/* Bloque 1: Gráfico Histórico */}
+            <div className="wireframe-block-large">
               {datosHistorico.length > 0 ? (
                 <HistoricoChart data={datosHistorico} />
               ) : (
-                <p style={{ color: 'var(--text-light)', fontSize: '0.85rem', textAlign: 'center', padding: '20px' }}>
+                <p className="fallback-text">
                   Ajusta tu Backend a la tabla 'metricas_homogeneas' para activar el gráfico histórico.
                 </p>
               )}
             </div>
-            <div className="wireframe-block-large"></div>
+
+            {/* Bloque 2: Gráfico de Radar */}
+            <div className="wireframe-block-large">
+              {datosTarjetas.length > 0 ? (
+                <RendimientoRadarChart data={datosTarjetas} />
+              ) : (
+                <p className="fallback-text">
+                  Cargando matriz de rendimiento...
+                </p>
+              )}
+            </div>
+
+            {/* Bloque 3: Espacio disponible */}
             <div className="wireframe-block-large"></div>
           </div>
 
