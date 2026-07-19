@@ -1,0 +1,126 @@
+/* Contenedor General */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 1. Navbar Superior */
+.navbar {
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 100px;
+  height: 35px;
+  background-color: var(--bg-dark);
+  border-radius: 6px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-dot {
+  width: 40px;
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.nav-dot.active {
+  background-color: var(--accent-cyan);
+}
+
+/* 2. Hero Section Oscura */
+.hero-section {
+  background-color: var(--bg-dark);
+  color: #ffffff;
+  padding: 60px 40px;
+  text-align: left;
+}
+
+.hero-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero-btn {
+  background-color: var(--accent-cyan);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  color: var(--bg-dark);
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* Contenedor de Contenido Central */
+.content-wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 3. Grid Central de 2 Columnas */
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Bloques de simulación del Wireframe */
+.wireframe-block-large {
+  background-color: var(--bg-dark);
+  height: 150px;
+  border-radius: 8px;
+}
+
+.wireframe-card-small {
+  background-color: var(--bg-dark);
+  height: 70px;
+  border-radius: 8px;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--bg-dark);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.footer-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent-cyan);
+  border-radius: 50%;
+}

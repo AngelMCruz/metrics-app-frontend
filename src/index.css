@@ -1,0 +1,17 @@
+:root {
+  --bg-primary: #F0F4F8;       /* Gris azulado muy claro para el fondo */
+  --bg-dark: #002E4F;          /* Azul marino profundo corporativo */
+  --text-main: #002E4F;        /* Azul marino para textos */
+  --text-light: #5A6E7F;       /* Gris azulado para descripciones */
+  --accent-cyan: #00C4CC;      /* Cian vibrante para botones/iconos */
+  --card-bg: #FFFFFF;          /* Blanco puro para tarjetas */
+  --border-color: #D3E2EE;     /* Gris claro para bordes */
+  --max-width: 1200px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}

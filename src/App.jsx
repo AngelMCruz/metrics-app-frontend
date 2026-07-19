@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from './services/api';
+import './App.css';
 
 function App() {
   const [metricas, setMetricas] = useState([]);
@@ -16,36 +17,65 @@ function App() {
         setError('Error al obtener las métricas: ' + err.message);
       });
   }, []);
-  
-  if (error) {
-    return (
-      <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
-        <h1>metrics-app-frontend</h1>
-        <p style={{ color: 'red' }}>{error}</p>
-      </div>
-    );
-  }
 
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '30px', color: '#002E4F' }}>
-      <h1>metrics-app-frontend</h1>
-      <h2>Prueba de Conectividad Base</h2>
-      <hr />
+    <div className="app-container">
+      
+      {/* 1. NAVBAR SUPERIOR */}
+      <header className="navbar">
+        <div className="navbar-logo"></div>
+        <div className="navbar-links">
+          <div className="nav-dot active"></div>
+          <div className="nav-dot"></div>
+          <div className="nav-dot"></div>
+          <div className="nav-dot"></div>
+        </div>
+      </header>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {/* 2. HERO SECTION OSCURA */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <h1>Metrics Dashboard</h1>
+          <p>Visualización estructurada de analítica y rendimiento organizacional bajo arquitectura desacoplada.</p>
+          <button className="hero-btn">Explorar</button>
+        </div>
+      </section>
 
-      <h3>Métricas obtenidas desde la API:</h3>
-      {metricas.length === 0 && !error ? (
-        <p>Cargando datos...</p>
-      ) : (
-        <ul>
-          {metricas.map((metrica) => (
-            <li key={metrica.id} style={{ margin: '10px 0', fontSize: '1.1rem' }}>
-              <strong>{metrica.titulo_reporte}</strong> - {metrica.valor_metrica}
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* CONTENEDOR CENTRAL */}
+      <div className="content-wrapper">
+        
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+
+        {/* 3. GRID DE DOS COLUMNAS */}
+        <div className="main-grid">
+          
+          {/* Columna Izquierda: Bloques Grandes */}
+          <div className="left-column">
+            <div className="wireframe-block-large"></div>
+            <div className="wireframe-block-large"></div>
+            <div className="wireframe-block-large"></div>
+          </div>
+
+          {/* Columna Derecha: Tarjetas Pequeñas */}
+          <div className="right-column">
+            <div className="wireframe-card-small"></div>
+            <div className="wireframe-card-small"></div>
+            <div className="wireframe-card-small"></div>
+            <div className="wireframe-card-small"></div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* 4. FOOTER */}
+      <footer className="footer">
+        <div className="footer-dots">
+          <div className="footer-dot"></div>
+          <div className="footer-dot"></div>
+          <div className="footer-dot"></div>
+        </div>
+      </footer>
+
     </div>
   );
 }
