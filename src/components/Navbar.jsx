@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Navbar.css';
 
-const Navbar = ({ onLoginClick, onRegisterClick }) => {
-  // 1. Estado inicial en minúsculas consistente
+const Navbar = ({ currentUser, onLoginClick, onRegisterClick, onLogout }) => {
   const [activeSection, setActiveSection] = useState('inicio');
+
+  // Función para obtener el nombre visual o correo
+  const getUserDisplayName = () => {
+    if (!currentUser) return '';
+    if (currentUser.nombre) return currentUser.nombre;
+    if (currentUser.email) return currentUser.email.split('@')[0];
+    return 'Usuario';
+  };
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
@@ -23,13 +30,11 @@ const Navbar = ({ onLoginClick, onRegisterClick }) => {
   };
 
   useEffect(() => {
-    // 2. Normalización estricta de los IDs en minúsculas
     const sections = ['inicio', 'reporte', 'niveles'];
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 150; // Offset para cambiar de pestaña con anticipación
+      const scrollPosition = window.scrollY + 150;
 
-      // Si está arriba de todo la pantalla, activar 'inicio' directamente
       if (window.scrollY < 100) {
         setActiveSection('inicio');
         return;
@@ -65,20 +70,36 @@ const Navbar = ({ onLoginClick, onRegisterClick }) => {
           <span className="brand-name">Metrics <span>UI</span></span>
         </div>
 
-        {/* Lado Derecho: Pastillas de Auth + Menú Nav */}
+        {/* Lado Derecho: Controles de Sesión + Menú Nav */}
         <div className="navbar-right-group">
           
-          {/* Nivel Superior: Pastillas Cyan */}
-          <div className="navbar-auth-pills">
-            <button className="auth-pill-btn" onClick={onRegisterClick} title="Regístrate">
-              Regístrate
-            </button>
-            <button className="auth-pill-btn" onClick={onLoginClick} title="Iniciar Sesión">
-              Iniciar Sesión
-            </button>
-          </div>
+          {/* Renderizado Condicional: Si hay usuario activo vs Si es visitante */}
+          {currentUser ? (
+            <div className="user-session-pills">
+              <span className="user-greeting">
+                Hola, <strong>{getUserDisplayName()}</strong>
+                {currentUser.role && (
+                  <span className={`role-badge ${currentUser.role}`}>
+                    {currentUser.role === 'admin' ? 'ADMIN' : 'USER'}
+                  </span>
+                )}
+              </span>
+              <button className="auth-pill-btn logout-btn" onClick={onLogout} title="Cerrar Sesión">
+                Salir
+              </button>
+            </div>
+          ) : (
+            <div className="navbar-auth-pills">
+              <button className="auth-pill-btn" onClick={onRegisterClick} title="Regístrate">
+                Regístrate
+              </button>
+              <button className="auth-pill-btn" onClick={onLoginClick} title="Iniciar Sesión">
+                Iniciar Sesión
+              </button>
+            </div>
+          )}
 
-          {/* Nivel Inferior: Menú de navegación */}
+          {/* Menú de navegación */}
           <nav className="navbar-nav">
             <a 
               href="#inicio" 
