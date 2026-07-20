@@ -1,11 +1,15 @@
-/* ==========================================
-   ESTILOS DE LAS TARJETAS DE MÉTRICA
-   ========================================== */
 .metric-row-container {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 0;
+  padding: 6px;
+  border-radius: 12px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-row-container:hover {
+  transform: translateX(4px);
 }
 
 .metric-visual-block {
@@ -19,9 +23,17 @@
   align-items: center;
   color: #ffffff;
   flex-shrink: 0;
-  box-shadow: 0 4px 6px rgba(0, 46, 79, 0.1);
   padding: 5px;
   box-sizing: border-box;
+  border: 1px solid rgba(0, 242, 254, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-row-container:hover .metric-visual-block {
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 0 18px rgba(0, 242, 254, 0.25);
+  transform: translateY(-2px);
 }
 
 .visual-value {
@@ -33,15 +45,21 @@
 }
 
 .visual-icon {
-  margin-top: 4px;
+  margin-top: 6px;
   color: var(--accent-cyan);
   display: flex;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.metric-row-container:hover .visual-icon {
+  transform: scale(1.15);
+  color: #ffffff;
 }
 
 .metric-text-block {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0px;
   flex-grow: 1;
 }
 
@@ -49,10 +67,11 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-main);
+  transition: color 0.2s ease;
 }
 
 .metric-row-description {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--text-light);
   line-height: 1.3;
 }
@@ -64,9 +83,10 @@
 }
 
 .badge-dot {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   background-color: var(--accent-cyan);
   border-radius: 3px;
   opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
