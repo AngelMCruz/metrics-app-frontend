@@ -72,16 +72,14 @@ function App() {
       <div className="content-wrapper">
         {error && <p className="error-message">{error}</p>}
 
-        {/* Encabezado dinámico con las pestañas de selección */}
-        <div className="filters-container">
+        <div className="active-department-header">
           {departamentos.map((dept) => (
-            <button
+            <span
               key={dept.id}
-              className={`filter-tab ${departamentoActivo === dept.id.toString() ? 'active' : ''}`}
-              onClick={() => setDepartamentoActivo(dept.id.toString())}
+              className={`dept-label ${departamentoActivo === dept.id.toString() ? 'active' : ''}`}
             >
               {dept.nombre}
-            </button>
+            </span>
           ))}
         </div>
 
