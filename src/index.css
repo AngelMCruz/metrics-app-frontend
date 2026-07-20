@@ -7,6 +7,7 @@
   --card-bg: #FFFFFF;          /* Blanco puro para tarjetas */
   --border-color: #D3E2EE;     /* Gris claro para bordes */
   --max-width: 1200px;
+  Overflow-x: hidden; 
 }
 
 body {
@@ -14,4 +15,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-main);
+
+  overflow-x: hidden; /* Evita el scroll horizontal */
 }
+
