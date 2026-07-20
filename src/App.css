@@ -129,3 +129,55 @@ svg:focus {
   border-radius: 2px;
   box-shadow: 0 0 8px rgba(0, 242, 254, 0.4);
 }
+
+/* ==========================================
+   MEDIA QUERIES (RESPONSIVE DESIGN)
+   ========================================== */
+
+@media (max-width: 992px) {
+  .content-wrapper {
+    width: 95%;
+    padding: 15px 10px;
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .wireframe-block-large {
+    height: 220px;
+  }
+
+  .active-department-header {
+    gap: 18px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .content-wrapper {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .wireframe-block-large {
+    height: 240px;
+    border-radius: 10px;
+  }
+
+  .active-department-header {
+    gap: 15px;
+    margin-bottom: 18px;
+  }
+
+  .dept-label {
+    font-size: 0.85rem;
+  }
+
+  .dept-label.active::after {
+    bottom: -13px;
+  }
+}

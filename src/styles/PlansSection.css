@@ -1,4 +1,6 @@
-/* TRIPLE RECUADRO / PRICING CARDS */
+/* ==========================================
+   PLANS SECTION - ESTILOS BASE
+   ========================================== */
 .plans-section {
   display: flex;
   justify-content: center;
@@ -80,4 +82,72 @@
 
 .plan-card.featured .check-icon {
   color: var(--bg-dark);
+}
+
+/* ==========================================
+   MEDIA QUERIES (RESPONSIVE DESIGN)
+   ========================================== */
+
+@media (max-width: 992px) {
+  .plans-section {
+    gap: 15px;
+    padding: 0 20px;
+  }
+
+  .plan-card {
+    width: 30%;
+    padding: 20px 15px;
+  }
+
+  .plan-card.featured {
+    transform: scale(1.04);
+  }
+
+  .plan-card.featured:hover {
+    transform: scale(1.06) translateY(-6px);
+  }
+}
+
+@media (max-width: 768px) {
+  .plans-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin: 40px 0;
+  }
+
+  .plan-card {
+    width: 100%;
+    max-width: 340px;
+    box-sizing: border-box;
+  }
+
+  .plan-card.featured {
+    transform: scale(1);
+    order: -1;
+  }
+
+  .plan-card.featured:hover {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .plans-section {
+    margin: 30px 0;
+    padding: 0 15px;
+  }
+
+  .plan-card {
+    max-width: 100%;
+    padding: 18px 15px;
+  }
+
+  .plan-header {
+    font-size: 0.95rem;
+  }
+
+  .plan-list {
+    font-size: 0.78rem;
+  }
 }

@@ -1,4 +1,6 @@
-/* HERO SECTION */
+/* ==========================================
+   HERO SECTION - ESTILOS BASE
+   ========================================== */
 .hero-section {
   background-color: var(--bg-dark);
   color: #ffffff;
@@ -88,4 +90,63 @@
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--accent-cyan);
+}
+
+/* ==========================================
+   MEDIA QUERIES (RESPONSIVE DESIGN)
+   ========================================== */
+
+/* Laptops pequeñas y Tablets horizontales (<= 992px) */
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 40px 0;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr; /* Pasa a una sola columna */
+    gap: 30px;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-content p {
+    margin-left: auto;
+    margin-right: auto; /* Centra el texto del párrafo */
+  }
+
+  .hero-preview {
+    justify-content: center; /* Centra las tarjetas KPI */
+  }
+}
+
+/* Dispositivos Móviles (<= 576px) */
+@media (max-width: 576px) {
+  .hero-section {
+    padding: 30px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 1.75rem; /* Escala el título en móviles */
+  }
+
+  .hero-content p {
+    font-size: 0.88rem;
+  }
+
+  .hero-preview {
+    flex-direction: column; /* Tarjetas KPI apiladas verticalmente */
+    width: 100%;
+  }
+
+  .preview-card {
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center; /* Centra valores e íconos internos */
+  }
+
+  .hero-btn {
+    width: 100%; /* Botón de ancho completo para mejor ergonomía táctil */
+  }
 }
