@@ -143,22 +143,74 @@ svg:focus {
 /* Footer */
 .footer {
   background-color: var(--bg-dark);
-  padding: 20px;
-  display: flex;
-  justify-content: center;
+  padding: 30px 20px;
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.footer-dots {
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.footer-dot {
-  width: 12px;
-  height: 12px;
+/* Redes Sociales (Los 3 botones/bloques) */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
   background-color: var(--accent-cyan);
-  border-radius: 50%;
+  color: var(--bg-dark);
+  border-radius: 8px; /* Bordes ligeramente redondeados como los bloques del boceto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  background-color: #ffffff;
+}
+
+/* Enlaces horizontales */
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-cyan);
+}
+
+.footer-links .divider {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 0.6rem;
+}
+
+/* Copyright */
+.footer-copyright {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.75rem;
+  margin-top: 4px;
 }
 
 /* ==========================================
@@ -342,7 +394,15 @@ svg:focus {
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.plan-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  border-color: rgba(0, 242, 254, 0.3); /* Destello sutil cian en el borde */
 }
 
 /* La tarjeta central resalta siendo más alta y de color cian */
@@ -350,6 +410,12 @@ svg:focus {
   background-color: var(--accent-cyan);
   transform: scale(1.08);
   color: var(--bg-dark);
+}
+
+.plan-card.featured:hover {
+  /* Combina el escalado con la elevación hacia arriba */
+  transform: scale(1.10) translateY(-8px);
+  box-shadow: 0 16px 30px rgba(0, 242, 254, 0.25); /* Sombra luminosa cian */
 }
 
 .plan-header {
