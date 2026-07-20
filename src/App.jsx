@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from './services/api';
 
+// Login
+import AuthModal from './Auth/AuthModal';
+
 // Layout & UI Components
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -21,6 +24,35 @@ function App() {
   const [departamentos, setDepartamentos] = useState([]);
   const [error, setError] = useState(null);
   const [departamentoActivo, setDepartamentoActivo] = useState('1');
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authTab, setAuthTab] = useState('login'); 
+  
+  // 🎯 1. Usamos solo una variable de estado única para el usuario
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // 🎯 2. Cargar usuario guardado en localStorage al iniciar la app
+  useEffect(() => {
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+      try {
+        setCurrentUser(JSON.parse(savedUser));
+      } catch (err) {
+        console.error('Error al parsear usuario de localStorage:', err);
+        localStorage.removeItem('currentUser');
+      }
+    }
+  }, []);
+
+  const handleOpenAuthModal = (tab) => {
+    setAuthTab(tab);
+    setIsAuthModalOpen(true);
+  };
+
+  // 🎯 3. Función para Cerrar Sesión
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('currentUser');
+  };
 
   useEffect(() => {
     api.get('/departamentos')
@@ -59,16 +91,17 @@ function App() {
 
   const datosHistorico = metricas.filter(m => m.mes && m.mes !== 'Actual');
 
-  // Obtener el nombre del departamento seleccionado actualmente
-  const departamentoNombreActual = departamentos.find(
-    d => d.id.toString() === departamentoActivo
-  )?.nombre || 'General';
-
   return (
     <div className="app-container">
-      <Navbar />
+      {/* 🎯 4. Pasamos currentUser y la función onLogout al Navbar */}
+      <Navbar 
+        onLoginClick={() => handleOpenAuthModal('login')}
+        onRegisterClick={() => handleOpenAuthModal('register')}
+        currentUser={currentUser}
+        onLogout={handleLogout}
+      />
+      
       <div id="inicio"><HeroSection /></div>
-
 
       <div className="content-wrapper">
         {error && <p className="error-message">{error}</p>}
@@ -105,7 +138,7 @@ function App() {
               )}
             </div>
 
-            {/* Bloque 3: Espacio disponible / Tercer gráfico */}
+            {/* Bloque 3: Espacio disponible */}
             <div className="wireframe-block-large"></div>
           </div>
 
@@ -116,7 +149,7 @@ function App() {
           </div>
         </div>
 
-        {/* Paginador / Carrusel Inferior sincronizado */}
+        {/* Paginador / Carrusel Inferior */}
         <DepartmentPagination 
           departamentos={departamentos} 
           activo={departamentoActivo} 
@@ -128,6 +161,18 @@ function App() {
       <div id="niveles"><PlansSection /></div>
       <div id="contacto"><Footer /></div>
       
+      {/* Modal de Autenticación */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        activeTab={authTab}
+        onAuthSuccess={(user) => {
+          // 🎯 5. Guardamos en el estado Y en localStorage
+          setCurrentUser(user);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          setIsAuthModalOpen(false);
+        }}
+      />
     </div>
   );
 }
