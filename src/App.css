@@ -23,35 +23,37 @@
 .content-wrapper {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px 20px;
   width: 90%;
   box-sizing: border-box;
+  scroll-margin-top: 70px;
 }
 
 /* Grid Central de 2 Columnas */
 .main-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 30px;
+  gap: 24px;
   margin-bottom: 20px;
 }
 
 .left-column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 20px;
 }
 
 .right-column {
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 12px;
 }
 
 /* Bloques homogéneos de simulación del Wireframe */
 .wireframe-block-large {
   background-color: var(--bg-dark);
-  height: 250px;
+  height: 200px;
   border-radius: 15px;
   padding: 4px;
   padding-bottom: 20px;

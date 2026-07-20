@@ -1,5 +1,5 @@
 import React from 'react';
-import './PlansSection.css';
+import '../styles/PlansSection.css';
 
 const PlansSection = () => {
   return (

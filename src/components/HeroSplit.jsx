@@ -1,5 +1,5 @@
 import React from 'react';
-import './HeroSplit.css';
+import '../styles/HeroSplit.css';
 
 const HeroSplit = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import './MetricCard.css';
+import '../styles/MetricCard.css';
 import { BarChart2, TrendingUp, DollarSign, Activity, Percent, Clock } from 'lucide-react';
 
 const getIconForMetric = (concepto) => {
