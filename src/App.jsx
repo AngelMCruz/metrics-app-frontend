@@ -67,7 +67,8 @@ function App() {
   return (
     <div className="app-container">
       <Navbar />
-      <HeroSection />
+      <div id="inicio"><HeroSection /></div>
+
 
       <div className="content-wrapper">
         {error && <p className="error-message">{error}</p>}
@@ -123,9 +124,10 @@ function App() {
         />
       </div>
 
-      <HeroSplit />
-      <PlansSection />
-      <Footer />
+      <div id="reporte"><HeroSplit /></div>
+      <div id="niveles"><PlansSection /></div>
+      <div id="contacto"><Footer /></div>
+      
     </div>
   );
 }
