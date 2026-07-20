@@ -10,7 +10,7 @@
 
 .metric-visual-block {
   width: 120px;
-  height: 160px;
+  height: 150px;
   background-color: var(--bg-dark);
   border-radius: 8px;
   display: flex;

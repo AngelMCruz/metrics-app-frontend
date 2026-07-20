@@ -148,6 +148,12 @@ function App() {
             <div className="wireframe-block-large">
               <DepartmentBanner departamentoNombre={departamentoNombreActual} />
             </div>
+
+            <DepartmentPagination 
+              departamentos={departamentos} 
+              activo={departamentoActivo} 
+              onSelect={setDepartamentoActivo} 
+            />
           </div>
 
           <div className="right-column">
@@ -157,11 +163,7 @@ function App() {
           </div>
         </div>
 
-        <DepartmentPagination 
-          departamentos={departamentos} 
-          activo={departamentoActivo} 
-          onSelect={setDepartamentoActivo} 
-        />
+        
       </div>
 
       <div id="reporte"><HeroSplit /></div>
