@@ -11,19 +11,21 @@ Este repositorio contiene la interfaz de usuario (Frontend) para la aplicación 
 
 ---
 
-## Componentes de Visualización (Charts)
+## Módulos y Funcionalidades Destacadas
 
-La aplicación integra dos módulos críticos de inteligencia de negocio desarrollados sobre **Recharts**:
+### 1. Visualización Avanzada de Datos (Charts)
+* **Histórico Mensual (`HistoricoChart.jsx`):** Mapea la evolución cronológica de métricas mediante un `AreaChart`. Incluye un algoritmo de reducción de escala numérica (`$1M`, `$700K`) para evitar el desborde visual en los ejes, rejillas sutiles y tooltips reactivos customizados.
+* **Balance de Rendimiento (`RendimientoRadarChart.jsx`):** Evalúa el rendimiento del mes en curso en un `RadarChart` poligonal. Incorpora una capa de **normalización de datos en tiempo real** que escala métricas heterogéneas (porcentajes vs. volúmenes crudos de miles de unidades) a una base homogénea sin distorsionar la lectura en el Tooltip.
 
-### 1. Histórico Mensual (`HistoricoChart.jsx`)
-* **Componente base:** `AreaChart` (`ResponsiveContainer`, `Area`, `XAxis`, `YAxis`, `CartesianGrid`, `Tooltip`).
-* **Propósito:** Mapea el comportamiento cronológico de los ingresos o KPI del departamento a lo largo del tiempo.
-* **Características:** Incluye un algoritmo de reducción de escala numérica (`$1M`, `$700K`) para prevenir el desborde en el eje Y, rejillas horizontales sutiles y tooltips reactivos customizados de alto contraste.
+### 2. Experiencia de Usuario Adaptativa y Dinámica
+* **Banner Ilustrado por Departamento (`DepartmentBanner.jsx`):** Renderiza recursos gráficos en SVG estilo *flat/tech* y resúmenes operativos que mutan de manera reactiva cada vez que el usuario navega entre áreas (*Sales*, *Marketing*, *Support*, *Engineering*).
+* **Paginador / Navegador de Departamentos (`DepartmentPagination.jsx`):** Módulo de selección simplificado que controla la consulta de métricas por categoría en tiempo real hacia la API REST.
 
-### 2. Balance de Rendimiento Actual (`RendimientoRadarChart.jsx`)
-* **Componente base:** `RadarChart` (`PolarGrid`, `PolarAngleAxis`, `PolarRadiusAxis`, `Radar`, `Tooltip`).
-* **Propósito:** Mapea de manera poligonal las métricas del mes en curso para evaluar el balance operativo en 4 dimensiones simétricas.
-* **Características:** Incorpora una capa matemática de **normalización de datos**. Transforma dinámicamente métricas heterogéneas (escalas dispares como variables de 0 a 100% frente a volúmenes crudos de hasta +4500 unidades) a una base común 100, garantizando la simetría del polígono sin alterar los valores reales expuestos al usuario en el Tooltip.
+### 3. Autenticación y Control de Sesión (`AuthModal.jsx`)
+* **Modal Reactivo:** Permite el flujo continuo de inicio de sesión y registro de cuentas de usuario diferenciadas por roles (`admin` y `user`)[cite: 1].
+* **Persistencia Local:** Sincronización automática de estado mediante `localStorage` para conservar la sesión del usuario al recargar la página.
+
+---
 
 ---
 
@@ -32,10 +34,39 @@ La aplicación integra dos módulos críticos de inteligencia de negocio desarro
 El código fuente se encuentra estructurado bajo buenas prácticas organizacionales dentro de la carpeta `/src`, garantizando la separación de responsabilidades:
 
 ```text
+```text
 src/
-├── components/   # Elementos visuales reutilizables (Cards, Dashboards, Navbar)
-├── services/     # Lógica corporativa externa y canal de comunicación HTTP (api.js)
-├── App.jsx       # Punto de entrada principal y orquestador del estado de la UI
-└── main.jsx      # Inicializador del DOM de React y configuraciones globales
+├── assets/            # Ilustraciones SVG corporativas y recursos estáticos
+├── Auth/              # Modal y lógica de Autenticación (AuthModal.jsx)
+├── components/        # Componentes UI (Navbar, Hero, MetricCards, Charts, Banner, Footer)
+├── services/          # Cliente Axios y configuración de llamadas API (api.js)
+├── styles/            # Hojas de estilo CSS modularizadas por componente
+├── App.jsx            # Orquestador principal del estado y flujo de la aplicación
+└── main.jsx           # Punto de entrada y renderizado en el DOM de React
 ```
 
+## Instrucciones de Instalación y Ejecución Local
+1. Clona este repositorio y navega a la carpeta del proyecto.
+```bash
+git clone <URL_DEL_REPOSOTORIO>
+cd metrics-app-frontend
+```
+
+2. Instala las dependencias necesarias:
+```bash
+npm install
+```
+
+3. Variables de Entorno
+```js
+URL base de la API REST Backend
+VITE_API_URL=http://localhost:3000/api
+```
+
+4. Ejecuta el servidor en modo desarrollo/producción:
+```bash
+npm run dev
+```
+
+### Despliegue en Producción
+El proyecto se encuentra optimizado para desplegarse como una Single Page Application (SPA) en Vercel, conectándose mediante variables de entorno de producción hacia la API backend desplegada.
