@@ -1,4 +1,5 @@
 import React from 'react';
+import './PlansSection.css';
 
 const PlansSection = () => {
   return (

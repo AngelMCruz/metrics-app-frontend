@@ -1,0 +1,41 @@
+/* HERO SPLIT */
+.hero-split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--bg-dark);
+  min-height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.hero-split-text {
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.hero-split-text h2 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
+}
+
+.hero-split-text p {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0 0 20px 0;
+}
+
+.hero-split-visual {
+  background-color: var(--accent-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-dark);
+  font-weight: 700;
+}

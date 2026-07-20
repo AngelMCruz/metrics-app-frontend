@@ -1,4 +1,5 @@
 import React from 'react';
+import './DepartmentPagination.css';
 
 const DepartmentPagination = ({ departamentos, activo, onSelect }) => {
   const handlePrev = () => {

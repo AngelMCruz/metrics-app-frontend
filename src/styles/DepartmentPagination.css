@@ -1,0 +1,55 @@
+/* ==========================================
+   PAGINADOR / CARRUSEL INFERIOR
+   ========================================== */
+.dashboard-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 10px 0;
+}
+
+.pagination-arrow {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.pagination-arrow:hover {
+  color: var(--accent-cyan);
+  transform: scale(1.25);
+}
+
+.pagination-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pagination-dot {
+  width: 14px;
+  height: 14px;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.pagination-dot:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.pagination-dot.active {
+  background-color: var(--accent-cyan);
+  border-color: var(--accent-cyan);
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
