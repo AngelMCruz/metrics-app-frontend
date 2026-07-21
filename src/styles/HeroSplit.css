@@ -1,10 +1,10 @@
 /* ==========================================
-   HERO SPLIT
+   HERO SPLIT - BASE STYLES
    ========================================== */
-
 .hero-split-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  background-color: var(--bg-dark);
   min-height: 300px;
   border-radius: 8px;
   overflow: hidden;
@@ -34,13 +34,18 @@
 }
 
 .hero-split-visual {
+  background-color: var(--accent-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--bg-dark);
   font-weight: 700;
+  padding: 20px;
 }
 
+/* ==========================================
+   HERO SPLIT - RESPONSIVE STYLES
+   ========================================== */
 @media (max-width: 992px) {
   .hero-split-section {
     grid-template-columns: 1fr;
@@ -48,15 +53,16 @@
   }
 
   .hero-split-text {
-    padding: 30px 25px;
+    padding: 30px 20px;
     margin-left: 0;
     align-items: center;
     text-align: center;
   }
 
   .hero-split-visual {
-    min-height: 180px;
-    padding: 20px;
+    padding: 25px 15px;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -67,20 +73,19 @@
   }
 
   .hero-split-text {
-    padding: 20px 15px;
+    padding: 24px 16px;
   }
 
   .hero-split-text h2 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .hero-split-text p {
     font-size: 0.8rem;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
   }
 
   .hero-split-visual {
-    min-height: 140px;
-    font-size: 0.9rem;
+    padding: 20px 12px;
   }
 }
