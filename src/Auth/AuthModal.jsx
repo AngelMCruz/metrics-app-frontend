@@ -172,7 +172,9 @@ const AuthModal = ({ isOpen, onClose, activeTab: initialTab = 'login', onAuthSuc
               </div>
 
               <div className="form-group">
-                <label>Rol de Usuario</label>
+                <label>Rol de Usuario <br />
+                  <span>Este apartado es unicamente demostrativo</span>
+                </label>
                 <select 
                   name="role" 
                   value={formData.role} 

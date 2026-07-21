@@ -1,8 +1,10 @@
-/* HERO SPLIT */
+/* ==========================================
+   HERO SPLIT
+   ========================================== */
+
 .hero-split-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: var(--bg-dark);
   min-height: 300px;
   border-radius: 8px;
   overflow: hidden;
@@ -32,10 +34,53 @@
 }
 
 .hero-split-visual {
-  background-color: var(--accent-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--bg-dark);
   font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .hero-split-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .hero-split-text {
+    padding: 30px 25px;
+    margin-left: 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-split-visual {
+    min-height: 180px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-split-section {
+    margin-bottom: 25px;
+    border-radius: 6px;
+  }
+
+  .hero-split-text {
+    padding: 20px 15px;
+  }
+
+  .hero-split-text h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-split-text p {
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+  }
+
+  .hero-split-visual {
+    min-height: 140px;
+    font-size: 0.9rem;
+  }
 }
