@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/AuthModal.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/auth';
+// URL base de la API estandarizada (Apunta a la raíz /api)
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 /**
  * Componente de modal para la autenticación y registro de usuarios.
@@ -74,7 +75,13 @@ const AuthModal = ({ isOpen, onClose, activeTab: initialTab = 'login', onAuthSuc
     setMessage({ type: '', text: '' });
     setLoading(true);
 
-    const endpoint = activeTab === 'register' ? `${API_URL}/register` : `${API_URL}/login`;
+    // Normaliza la URL base para asegurar que termine en /api sin duplicar barras
+    const cleanBaseUrl = API_BASE.replace(/\/+$/, '');
+    
+    // Construcción explícita de las rutas de autenticación
+    const endpoint = activeTab === 'register' 
+      ? `${cleanBaseUrl}/auth/register` 
+      : `${cleanBaseUrl}/auth/login`;
 
     try {
       const response = await fetch(endpoint, {
@@ -88,7 +95,7 @@ const AuthModal = ({ isOpen, onClose, activeTab: initialTab = 'login', onAuthSuc
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Ocurrió un error en la solicitud');
+        throw new Error(data.error || 'Ocurrió un error al procesar la solicitud');
       }
 
       if (activeTab === 'register') {
@@ -113,7 +120,7 @@ const AuthModal = ({ isOpen, onClose, activeTab: initialTab = 'login', onAuthSuc
     } catch (err) {
       setMessage({
         type: 'error',
-        text: err.message
+        text: err.message || 'Error de conexión con el servidor'
       });
     } finally {
       setLoading(false);
